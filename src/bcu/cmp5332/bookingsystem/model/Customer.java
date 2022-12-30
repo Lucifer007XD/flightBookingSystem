@@ -10,13 +10,15 @@ public class Customer {
     private int id;
     private String name;
     private String phone;
+    private String email; 
     private final List<Booking> bookings = new ArrayList<>();
     
     // TODO: implement constructor here
-    public Customer(int id,String name,String phone) {
+    public Customer(int id,String name,String phone,String email) {
     	this.id=id;
     	this.name=name;
     	this.phone=phone;
+    	this.email=email;
     }
     
     public void setName(String nm) {
@@ -24,6 +26,10 @@ public class Customer {
     }
     public void setPhone(String phn) {
     	this.phone=phn;
+    }
+    
+    public void setEmail(String em) {
+    	this.email=em;
     }
     
     public int getId() {
@@ -35,14 +41,17 @@ public class Customer {
     public String getPhone() {
     	return this.phone;
     }
+    public String getEmail() {
+    	return this.email;
+    }
     public List<Booking> getBookings() {
     	return Collections.unmodifiableList(bookings);
     }
     public String getDetailsShort() {
-    	return "Customer #"+this.id+" - Name: "+this.name+"- Phone: "+this.phone;
+    	return "Customer #"+this.id+" - Name: "+this.name+"- Phone: "+this.phone+"- Email: "+this.email;
     }
     public String getDetailsLong() {
-    	String personalDetails="Customer #"+this.id+"\n"+"Name: "+this.name+"\n"+"Phone: "+this.phone;
+    	String personalDetails="Customer #"+this.id+"\n"+"Name: "+this.name+"\n"+"Phone: "+this.phone+"\n"+"Email: "+this.email;
     	String bookingDetails="";
     	int numOfBookings=0;
     	for (Booking x:bookings) {
