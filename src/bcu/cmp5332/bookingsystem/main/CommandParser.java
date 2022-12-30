@@ -1,10 +1,7 @@
 package bcu.cmp5332.bookingsystem.main;
 
-import bcu.cmp5332.bookingsystem.commands.LoadGUI;
-import bcu.cmp5332.bookingsystem.commands.ListFlights;
-import bcu.cmp5332.bookingsystem.commands.AddFlight;
-import bcu.cmp5332.bookingsystem.commands.Command;
-import bcu.cmp5332.bookingsystem.commands.Help;
+import bcu.cmp5332.bookingsystem.commands.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,16 +20,30 @@ public class CommandParser {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 System.out.print("Flight Number: ");
                 String flighNumber = reader.readLine();
-                flighNumber.toUpperCase();
+                flighNumber=flighNumber.toUpperCase();
                 System.out.print("Origin: ");
                 String origin = reader.readLine();
+                origin=origin.toLowerCase();
                 System.out.print("Destination: ");
                 String destination = reader.readLine();
+                destination=destination.toLowerCase();
 
                 LocalDate departureDate = parseDateWithAttempts(reader);
 
                 return new AddFlight(flighNumber, origin, destination, departureDate);
             } else if (cmd.equals("addcustomer")) {
+            	BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+            	System.out.print("Customer Name: ");
+            	String customerName=reader.readLine();
+            	customerName=customerName.toUpperCase();
+            	System.out.print("Phone Number: ");
+            	String customerPhone=reader.readLine();
+            	System.out.print("Email(Example@mail.com): ");
+            	String customerEmail=reader.readLine();
+            	
+            	return new AddCustomer(customerName,customerPhone,customerEmail);
+            	
+            	
                 
             } else if (cmd.equals("loadgui")) {
                 return new LoadGUI();
@@ -40,7 +51,7 @@ public class CommandParser {
                 if (line.equals("listflights")) {
                     return new ListFlights();
                 } else if (line.equals("listcustomers")) {
-                    
+                    return new ListCustomers();
                 } else if (line.equals("help")) {
                     return new Help();
                 }
@@ -56,6 +67,12 @@ public class CommandParser {
                 
 
                 if (cmd.equals("addbooking")) {
+                	int customerId=Integer.parseInt(parts[1]);
+                	int flightId=Integer.parseInt(parts[2]);
+                	LocalDate bookingDate=LocalDate.now();
+                	return new AddBooking(customerId,flightId,bookingDate);
+                	
+                	
                     
                 } else if (cmd.equals("editbooking")) {
                     
