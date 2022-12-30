@@ -52,10 +52,15 @@ public class FlightBookingSystem {
         flights.put(flight.getId(), flight);
     }
 
-    public void addCustomer(Customer customer)throws IllegalArgumentException {
+    public void addCustomer(Customer customer)throws IllegalArgumentException,FlightBookingSystemException {
         if(customers.containsKey(customer.getId())) {
         	throw new IllegalArgumentException("Duplicate Passenger ID.");
         	
+        }
+        for(Customer existing: customers.values()) {
+        	if(existing.getEmail().equals(customer.getEmail())||existing.getPhone().equals(customer.getPhone())) {
+        		throw new FlightBookingSystemException("There is a Passenger with same Email/Phone Number in the System.");
+        	}
         }
         customers.put(customer.getId(), customer);
         }
