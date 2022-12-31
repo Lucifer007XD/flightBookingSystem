@@ -59,9 +59,9 @@ public class CommandParser {
                 int id = Integer.parseInt(parts[1]);
 
                 if (cmd.equals("showflight")) {
-                    
+                	return new ShowFlight(id);
                 } else if (cmd.equals("showcustomer")) {
-                    
+                	return new ShowCustomer(id);
                 }
             } else if (parts.length == 3) {
                 
@@ -77,7 +77,9 @@ public class CommandParser {
                 } else if (cmd.equals("editbooking")) {
                     
                 } else if (cmd.equals("cancelbooking")) {
-                    
+                	int cusId=Integer.parseInt(parts[1]);
+                	int fliId=Integer.parseInt(parts[2]);
+                	return new CancelBooking(cusId, fliId);
                 }
             }
         } catch (NumberFormatException ex) {
