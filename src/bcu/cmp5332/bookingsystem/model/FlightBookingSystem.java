@@ -59,7 +59,7 @@ public class FlightBookingSystem {
         }
         for(Customer existing: customers.values()) {
         	if(existing.getEmail().equals(customer.getEmail())||existing.getPhone().equals(customer.getPhone())) {
-        		throw new FlightBookingSystemException("There is a Passenger with same Email/Phone Number in the System.");
+        		throw new FlightBookingSystemException("There is a Passenger with same Email or Phone Number in the System.");
         	}
         }
         customers.put(customer.getId(), customer);
