@@ -37,7 +37,7 @@ public class BookingDataManager implements DataManager {
     				LocalDate depDate = LocalDate.parse(proper[8]);
     				Flight f1 = new Flight(flightId, flightNum, origin, des, depDate);
     				Customer c1 = new Customer(cusID, cusName, cusPhone, cusEmail);
-    				LocalDate date = fbs.getSystemDate();
+    				LocalDate date = LocalDate.parse(proper[9]);
     				Booking b1 = new Booking(c1, f1, date);
     				c1.addBooking(b1);
     			} catch (NumberFormatException ex) {
@@ -52,5 +52,23 @@ public class BookingDataManager implements DataManager {
     @Override
     public void storeData(FlightBookingSystem fbs) throws IOException {
         // TODO: implementation here
+        try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))){
+    		for (Customer c1: fbs.getCustomer()) {
+    			for(Booking b1: c1.getBooking()){
+                    Customer customer=b1.getCustomer();
+                    Flight flight=b1.getFlight();
+                    out.print(customer.getId() + SEPARATOR);
+    			    out.print(customer.getName() + SEPARATOR);
+    			    out.print(customer.getPhone() + SEPARATOR);
+    			    out.print(customer.getEmail() + SEPARATOR);
+                    out.print(flight.getId()+SEPARATOR);
+                    out.print(flight.getFlightNumber()+SEPARATOR);
+                    out.print(flight.getOrigin()+SEPARATOR);
+                    out.print(flight.getDestination()+SEPARATOR);
+                    out.print(flight.getDepartureDate()+SEPARATOR);
+                    out.print(b1.getBookingDate()+SEPARATOR);
+    			    out.println();
+    		}
+    	}
     }
 }
