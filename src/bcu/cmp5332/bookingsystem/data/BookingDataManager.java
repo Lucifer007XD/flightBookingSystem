@@ -54,7 +54,7 @@ public class BookingDataManager implements DataManager {
         // TODO: implementation here
         try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))){
     		for (Customer c1: fbs.getCustomer()) {
-    			for(Booking b1: c1.getBooking()){
+    			for(Booking b1: c1.getBookings()){
                     Customer customer=b1.getCustomer();
                     Flight flight=b1.getFlight();
                     out.print(customer.getId() + SEPARATOR);
