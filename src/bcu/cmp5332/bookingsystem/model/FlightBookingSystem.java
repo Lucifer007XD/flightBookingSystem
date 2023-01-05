@@ -37,6 +37,19 @@ public class FlightBookingSystem {
         }
         return customers.get(id);
     }
+    public int getCustomerByBookingId(int bookingId) throws FlightBookingSystemException {
+    	List<Customer> customer = new ArrayList<>(customers.values());
+    	int custId = 0;
+		for (Customer c : customer) {
+			for (Booking b : c.getBookings()) {
+				if (b.getId() == bookingId) {
+					custId = c.getId();
+					return custId;
+				}
+			}
+		}
+		throw new FlightBookingSystemException("Invalid Booking ID.");
+    }
 
     public void addFlight(Flight flight) throws FlightBookingSystemException {
         if (flights.containsKey(flight.getId())) {
