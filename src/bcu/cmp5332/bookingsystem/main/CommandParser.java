@@ -75,6 +75,12 @@ public class CommandParser {
                 	
                     
                 } else if (cmd.equals("editbooking")) {
+                    int cusId=Integer.parseInt(parts[1]);
+                	int fliId=Integer.parseInt(parts[2]);
+                	BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+                	System.out.print("New Flight Id: ");
+                	int newFlightId = Integer.parseInt(reader.readLine());
+                	return new EditBooking(cusId, fliId, newFlightId);
                     
                 } else if (cmd.equals("cancelbooking")) {
                 	int cusId=Integer.parseInt(parts[1]);
