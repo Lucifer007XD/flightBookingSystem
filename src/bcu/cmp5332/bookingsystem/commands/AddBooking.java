@@ -16,16 +16,18 @@ public class AddBooking implements Command{
 	}
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem)throws FlightBookingSystemException{
+		int maxId = 0;
+		for (Customer c : flightBookingSystem.getCustomer()) {
+		    if (c.getBookings().size() > 0) {
+		    	maxId = maxId + c.getBookings().size();
+		    }
+		}
 		Customer customer=flightBookingSystem.getCustomerByID(customerId);
 		Flight flight=flightBookingSystem.getFlightByID(flightId);
-		Booking booking=new Booking(customer,flight,bookingDate);
+		Booking booking=new Booking(++maxId,customer,flight,bookingDate);
 		customer.addBooking(booking);
 		flight.addPassenger(customer);
 		System.out.println("Booking Issued Successsfully");
 	}
-	
-	
-	
-	
 
 }
