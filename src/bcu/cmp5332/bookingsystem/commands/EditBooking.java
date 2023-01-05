@@ -22,12 +22,8 @@ public class EditBooking implements Command {
 	
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem)throws FlightBookingSystemException{
-		Customer customer=flightBookingSystem.getCustomerByID(customerId);
-		Flight flight=flightBookingSystem.getFlightByID(flightId);
-		flight.removePassenger(customer);
-		customer.cancelBookingForFlight(flight);
-		LocalDate date = LocalDate.now();
-		AddBooking addBooking = new AddBooking(customerId, newFlightId, date);
+		customerId = flightBookingSystem.getCustomerByBookingId(bookingId);
+		
 		System.out.println("Booking Updated Successsfully");
 	}
 	
