@@ -26,13 +26,13 @@ public class BookingDataManager implements DataManager {
     			String line = sc1.nextLine();
     			String[] proper = line.split(SEPARATOR, -1);
     			try {
-    				int  cusID = Integer.parseInt(proper[0]);
-    				
-    				int flightId = Integer.parseInt(proper[1]);
+    				int  bookingID = Integer.parseInt(proper[0]);
+    				int  cusID = Integer.parseInt(proper[1]);
+    				int flightId = Integer.parseInt(proper[2]);
     				Flight f1 = fbs.getFlightByID(flightId);
     				Customer c1 =fbs.getCustomerByID(cusID);
-    				LocalDate date = LocalDate.parse(proper[2]);
-    				Booking b1 =new Booking(c1, f1, date);
+    				LocalDate date = LocalDate.parse(proper[3]);
+    				Booking b1 = new Booking(bookingID, c1, f1, date);
     				c1.addBooking(b1);
 					f1.addPassenger(c1);
     			} catch (NumberFormatException ex) {
@@ -52,10 +52,9 @@ public class BookingDataManager implements DataManager {
     			for(Booking b1: c1.getBookings()){
                     Customer customer=b1.getCustomer();
                     Flight flight=b1.getFlight();
+                    out.print(b1.getId() + SEPARATOR);
                     out.print(customer.getId() + SEPARATOR);
-    			   
                     out.print(flight.getId()+SEPARATOR);
-                    
                     out.print(b1.getBookingDate()+SEPARATOR);
     			    out.println();
 				}
