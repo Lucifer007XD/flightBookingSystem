@@ -83,7 +83,7 @@ public class Customer {
     		if (bookings.get(i).getFlight()==flight) {
     			bookings.remove(i);
     			n+=1;
-   
+                break;
     		}
     	}
     	if (n<=0) {
