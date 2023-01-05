@@ -109,6 +109,7 @@ public class Flight {
     		if(p==passenger) {
     			n+=1;
     			passengers.remove(p);
+			break;
     		}
     	}
     	if(n<=0) {
