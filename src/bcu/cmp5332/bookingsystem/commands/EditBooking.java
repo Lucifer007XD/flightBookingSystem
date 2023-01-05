@@ -8,21 +8,34 @@ import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 public class EditBooking implements Command {
-
-	private int customerId;
+	private int bookingId;
 	private int flightId;
-	private int newFlightId ;
 	
-	public EditBooking(int customerId,int flightId, int newFlightId ) {
-		this.customerId=customerId;
+	public EditBooking(int bookingId,int flightId) {
+		this.bookingId=bookingId;
 		this.flightId=flightId;	
-		this.newFlightId = newFlightId ;
 		
 	}
 	
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem)throws FlightBookingSystemException{
-		customerId = flightBookingSystem.getCustomerByBookingId(bookingId);
+		int oldFlightId;
+		int customerId = flightBookingSystem.getCustomerByBookingId(bookingId);
+		Customer customer=flightBookingSystem.getCustomerByID(customerId);
+		Flight newFlight=flightBookingSystem.getFlightByID(flightId);
+		Flight oldFlight=flightBookingSystem.getFlightByID(oldFlightId);
+		for(Booking b:customer.getBookings()){
+			if(b.getId()==bookingId){
+				oldFlightId=b.getFlight().getId();
+				b.setFlight(newFlight);
+				break;
+			}
+
+		}
+
+		oldFlight.removePassenger(customer);
+		
+		newFlight.addPassenger(customer);
 		
 		System.out.println("Booking Updated Successsfully");
 	}
