@@ -3,18 +3,21 @@ package bcu.cmp5332.bookingsystem.model;
 import java.time.LocalDate;
 
 public class Booking {
-    
+    private int bookingId;
     private Customer customer;
     private Flight flight;
     private LocalDate bookingDate;
     
 
-    public Booking(Customer customer, Flight flight, LocalDate bookingDate) {
+    public Booking(int bookingId,Customer customer, Flight flight, LocalDate bookingDate) {
         // TODO: implementation here
     	this.customer=customer;
     	this.flight=flight;
     	this.bookingDate=bookingDate;
         
+    }
+    public void setId(int id){
+        this.bookingId=id;
     }
     public void setCustomer(Customer cst) {
     	this.customer=cst;
@@ -26,6 +29,9 @@ public class Booking {
     public void setBookingDate(LocalDate bkdt) {
     	this.bookingDate=bkdt;
     	
+    }
+    public int getId(int id){
+        return this.bookingId;
     }
     
     public Customer getCustomer() {
