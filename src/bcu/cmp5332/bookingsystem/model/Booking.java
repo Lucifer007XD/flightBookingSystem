@@ -30,7 +30,7 @@ public class Booking {
     	this.bookingDate=bkdt;
     	
     }
-    public int getId(int id){
+    public int getId(){
         return this.bookingId;
     }
     
@@ -44,5 +44,5 @@ public class Booking {
     	return this.bookingDate;
     }
     
-        
+       
 }
