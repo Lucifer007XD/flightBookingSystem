@@ -64,27 +64,24 @@ public class CommandParser {
                 	return new ShowCustomer(id);
                 }
             } else if (parts.length == 3) {
-                LocalDate bookingDate=LocalDate.now();
+                
+
                 if (cmd.equals("addbooking")) {
                 	int customerId=Integer.parseInt(parts[1]);
                 	int flightId=Integer.parseInt(parts[2]);
-                	
+                	LocalDate bookingDate=LocalDate.now();
                 	return new AddBooking(customerId,flightId,bookingDate);
                 	
                 	
                     
                 } else if (cmd.equals("editbooking")) {
-                    int cusId=Integer.parseInt(parts[1]);
-                	int fliId=Integer.parseInt(parts[2]);
-                	BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
-                	System.out.print("New Flight Id: ");
-                	int newFlightId = Integer.parseInt(reader.readLine());
-                	return new EditBooking(cusId, fliId, newFlightId,bookingDate);
-                    
+                	int bookingId=Integer.parseInt(parts[1]);
+                	int flighId=Integer.parseInt(parts[2]);
+                	return new EditBooking(bookingId, flighId);
                 } else if (cmd.equals("cancelbooking")) {
                 	int cusId=Integer.parseInt(parts[1]);
                 	int fliId=Integer.parseInt(parts[2]);
-                	return new CancelBooking(cusId, fliId);
+                	return new CancelBooking(cusId, fliId); 
                 }
             }
         } catch (NumberFormatException ex) {
