@@ -19,11 +19,11 @@ public class EditBooking implements Command {
 	
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem)throws FlightBookingSystemException{
-		int oldFlightId;
+		int oldFlightId=0;
 		int customerId = flightBookingSystem.getCustomerByBookingId(bookingId);
 		Customer customer=flightBookingSystem.getCustomerByID(customerId);
 		Flight newFlight=flightBookingSystem.getFlightByID(flightId);
-		Flight oldFlight=flightBookingSystem.getFlightByID(oldFlightId);
+		
 		for(Booking b:customer.getBookings()){
 			if(b.getId()==bookingId){
 				oldFlightId=b.getFlight().getId();
@@ -32,7 +32,7 @@ public class EditBooking implements Command {
 			}
 
 		}
-
+		Flight oldFlight=flightBookingSystem.getFlightByID(oldFlightId);
 		oldFlight.removePassenger(customer);
 		
 		newFlight.addPassenger(customer);
