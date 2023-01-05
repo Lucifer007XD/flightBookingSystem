@@ -97,7 +97,6 @@ public class Flight {
         	if(p==passenger) {
         		throw new FlightBookingSystemException("Passenger Already Exists");
         	}
-        		
         	
         }
         passengers.add(passenger);
@@ -109,7 +108,7 @@ public class Flight {
     		if(p==passenger) {
     			n+=1;
     			passengers.remove(p);
-			break;
+    			break;
     		}
     	}
     	if(n<=0) {
