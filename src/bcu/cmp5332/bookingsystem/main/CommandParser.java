@@ -64,12 +64,11 @@ public class CommandParser {
                 	return new ShowCustomer(id);
                 }
             } else if (parts.length == 3) {
-                
-
+                LocalDate bookingDate=LocalDate.now();
                 if (cmd.equals("addbooking")) {
                 	int customerId=Integer.parseInt(parts[1]);
                 	int flightId=Integer.parseInt(parts[2]);
-                	LocalDate bookingDate=LocalDate.now();
+                	
                 	return new AddBooking(customerId,flightId,bookingDate);
                 	
                 	
@@ -80,7 +79,7 @@ public class CommandParser {
                 	BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
                 	System.out.print("New Flight Id: ");
                 	int newFlightId = Integer.parseInt(reader.readLine());
-                	return new EditBooking(cusId, fliId, newFlightId);
+                	return new EditBooking(cusId, fliId, newFlightId,bookingDate);
                     
                 } else if (cmd.equals("cancelbooking")) {
                 	int cusId=Integer.parseInt(parts[1]);
