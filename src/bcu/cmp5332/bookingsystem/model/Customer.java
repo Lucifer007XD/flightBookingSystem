@@ -44,6 +44,7 @@ public class Customer {
     public String getEmail() {
     	return this.email;
     }
+    
     public List<Booking> getBookings() {
     	return Collections.unmodifiableList(bookings);
     }
@@ -83,7 +84,7 @@ public class Customer {
     		if (bookings.get(i).getFlight()==flight) {
     			bookings.remove(i);
     			n+=1;
-                break;
+    			break;
     		}
     	}
     	if (n<=0) {
