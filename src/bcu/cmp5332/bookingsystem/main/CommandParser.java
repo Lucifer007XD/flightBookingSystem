@@ -12,6 +12,7 @@ public class CommandParser {
     
     public static Command parse(String line) throws IOException, FlightBookingSystemException {
         try {
+        	LocalDate today=LocalDate.now();
             String[] parts = line.split(" ", 3);
             String cmd = parts[0];
 
@@ -29,8 +30,13 @@ public class CommandParser {
                 destination=destination.toLowerCase();
 
                 LocalDate departureDate = parseDateWithAttempts(reader);
-
-                return new AddFlight(flighNumber, origin, destination, departureDate);
+                System.out.print("Price: ");
+                double price =Double.parseDouble( reader.readLine());
+                
+                System.out.print("Number of Seats: ");
+                int capacity =Integer.parseInt( reader.readLine());
+              
+                return new AddFlight(flighNumber, origin, destination, departureDate,price,capacity);
             } else if (cmd.equals("addcustomer")) {
             	BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
             	System.out.print("Customer Name: ");
@@ -62,6 +68,10 @@ public class CommandParser {
                 	return new ShowFlight(id);
                 } else if (cmd.equals("showcustomer")) {
                 	return new ShowCustomer(id);
+                }else if(cmd.equals("removeflight")) {
+                	return new RemoveFlight(id);
+                }else if(cmd.equals("removecustomer")) {
+                	return new RemoveCustomer(id);
                 }
             } else if (parts.length == 3) {
                 
