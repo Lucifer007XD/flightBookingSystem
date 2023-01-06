@@ -17,6 +17,8 @@ public class ShowFlight implements Command {
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem)throws FlightBookingSystemException{
 		 Flight flight = flightBookingSystem.getFlightByID(flightId);
-		 System.out.println(flight.getDetailsLong());
+		 if(flight.getStatus()==false) {
+			 System.out.println(flight.getDetailsLong());
+		 }
 	}
 }
