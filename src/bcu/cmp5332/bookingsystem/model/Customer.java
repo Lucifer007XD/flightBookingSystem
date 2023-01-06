@@ -12,6 +12,7 @@ public class Customer {
     private String phone;
     private String email; 
     private final List<Booking> bookings = new ArrayList<>();
+    private boolean hidden = false;
     
     // TODO: implement constructor here
     public Customer(int id,String name,String phone,String email) {
@@ -43,6 +44,12 @@ public class Customer {
     }
     public String getEmail() {
     	return this.email;
+    }
+     public boolean getStatus() {
+    	return this.hidden;
+    }
+    public void setStatus(boolean b) {
+    	this.hidden =b;
     }
     
     public List<Booking> getBookings() {
