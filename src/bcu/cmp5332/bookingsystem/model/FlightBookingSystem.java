@@ -19,7 +19,7 @@ public class FlightBookingSystem {
         List<Flight> out = new ArrayList<>(flights.values());
         return Collections.unmodifiableList(out);
     }
-    public List<Customer> getCustomer(){
+    public List<Customer> getCustomers(){
     	List<Customer> out=new ArrayList<>(customers.values());
     	return Collections.unmodifiableList(out);
     }
