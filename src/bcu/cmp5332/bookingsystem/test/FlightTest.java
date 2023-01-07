@@ -15,14 +15,15 @@ import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
+import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 
 
 class FlightTest {
 	
-	String inputDate = "2022-12-24";
-	Flight flight = new Flight(1, "FL007", "London", "Leeds", LocalDate.parse(inputDate));
 
+	Flight flight = new Flight(1, "FL007", "London", "Leeds", LocalDate.parse("2022-12-24"), 270.0, 125);
+	Customer customer = new Customer(1, "Vish ODEDRA", "9876543210", "vish@microsoft.com");
 	
 	
 	//Testing FLIGHT class
@@ -73,7 +74,7 @@ class FlightTest {
 	@Test
 	public void testGetDepartureDate() throws Exception {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate date = LocalDate.parse(inputDate, formatter);
+		LocalDate date = LocalDate.parse("2022-12-24", formatter);
 		assertEquals(date, flight.getDepartureDate());
 	}
 	
@@ -86,22 +87,58 @@ class FlightTest {
 	}
 	
 	@Test
+	public void testGetStatus() throws Exception {
+		assertFalse(flight.getStatus());
+	}
+	
+	@Test
+	public void testSetStatus() throws Exception {
+		flight.setStatus(true);
+		assertTrue(flight.getStatus());
+	}
+	
+	@Test
+	public void testGetNoOfSeats() throws Exception {
+		assertEquals(125, flight.getNoOfSeats());
+	}
+	
+	@Test
+	public void testSetNoOfSeats() throws Exception {
+		flight.setNoOfSeats(150);
+		assertEquals(150, flight.getNoOfSeats());
+	}
+	
+	@Test
+	public void testGetPrice() throws Exception {
+    	assertEquals(270.0, flight.getPrice(), 1e-6);
+	}
+	
+	@Test
+	public void testSetPrice() throws Exception {
+		flight.setPrice(300);
+		assertEquals(300, flight.getPrice(), 1e-6);
+	}
+	
+	@Test
 	public void testGetPassanger() throws Exception {
-		//dont know, how to test
-		assertEquals(passenger, flight.getPassengers());
+		List<Customer> c1 = new ArrayList<>();
+		flight.addPassenger(customer);
+		c1.add(customer);
+		assertEquals(c1, flight.getPassengers());
 	}
 	
 	@Test
 	public void testGetDetailsShort() throws Exception {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-		String shortDetails = "Flight #" + flight.getId() + " - " + flight.getFlightNumber() + " - " + flight.getOrigin() + " to " + flight.getDestination() + " on " + flight.getDepartureDate().format(formatter);
+		String shortDetails = "Flight #" + flight.getId() + " - " + flight.getFlightNumber() + " - " + flight.getOrigin() + " to " + flight.getDestination() + " on " + flight.getDepartureDate().format(formatter)+" - Price: $"+flight.getPrice();
 		assertEquals(shortDetails, flight.getDetailsShort());
 	}
 	
 	@Test
 	public void testGetDetailsLong() throws Exception {
+		int remSeats=flight.getNoOfSeats()-flight.getPassengers().size();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String longDetail = "Flight #"+flight.getId()+"\nFlight No.: "+flight.getFlightNumber()+"\nOrigin: "+flight.getOrigin()+"\nDestination: "+flight.getDestination()+"\nDeparture Date: "+flight.getDepartureDate().format(formatter);
+		String longDetail = "Flight #"+flight.getId()+"\nFlight No.: "+flight.getFlightNumber()+"\nOrigin: "+flight.getOrigin()+"\nDestination: "+flight.getDestination()+"\nDeparture Date: "+flight.getDepartureDate().format(formatter) +"\nPrice: "+flight.getPrice()+"\n"+"Total No. of Seats: "+flight.getNoOfSeats()+"\n"+"No. of Seats Left: "+remSeats;
 		String passengerDetails="";
         for(Customer p:flight.getPassengers()) {
         	passengerDetails=passengerDetails+"\n"+"* Id: "+p.getId()+" - "+p.getName()+" - "+p.getPhone();
@@ -112,15 +149,17 @@ class FlightTest {
 	
 	@Test
 	public void testAddPassenger() throws Exception {
-		//dont know, how to test
-		
-		assertEquals(, flight.addPassenger(customer));
+		List<Customer> c1 = new ArrayList<>();
+		flight.addPassenger(customer);
+		c1.add(customer);
+		assertEquals(c1, flight.getPassengers());
 	}
 	
 	@Test
 	public void testRemovePassenger() throws Exception {
-		//dont know, how to test
-		
-		assertEquals(, flight.removePassenger(customer));
+		List<Customer> c1 = new ArrayList<>();
+		flight.addPassenger(customer);
+		flight.removePassenger(customer);
+		assertEquals(c1, flight.getPassengers());
 	}
 }
