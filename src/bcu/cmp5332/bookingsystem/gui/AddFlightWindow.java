@@ -1,6 +1,7 @@
 package bcu.cmp5332.bookingsystem.gui;
 
 import bcu.cmp5332.bookingsystem.commands.AddFlight;
+
 import bcu.cmp5332.bookingsystem.commands.Command;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import java.awt.BorderLayout;
@@ -25,6 +26,8 @@ public class AddFlightWindow extends JFrame implements ActionListener {
     private JTextField originText = new JTextField();
     private JTextField destinationText = new JTextField();
     private JTextField depDateText = new JTextField();
+    private JTextField priceText=new JTextField();
+    private JTextField capacityText=new JTextField();
 
     private JButton addBtn = new JButton("Add");
     private JButton cancelBtn = new JButton("Cancel");
@@ -47,9 +50,9 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
         setTitle("Add a New Flight");
 
-        setSize(350, 220);
+        setSize(400, 300);
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(5, 2));
+        topPanel.setLayout(new GridLayout(7, 2));
         topPanel.add(new JLabel("Flight No : "));
         topPanel.add(flightNoText);
         topPanel.add(new JLabel("Origin : "));
@@ -58,6 +61,10 @@ public class AddFlightWindow extends JFrame implements ActionListener {
         topPanel.add(destinationText);
         topPanel.add(new JLabel("Departure Date (YYYY-MM-DD) : "));
         topPanel.add(depDateText);
+        topPanel.add(new JLabel("Price in $: "));
+        topPanel.add(priceText);
+        topPanel.add(new JLabel("No. of Seats: "));
+        topPanel.add(capacityText);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
@@ -91,6 +98,8 @@ public class AddFlightWindow extends JFrame implements ActionListener {
             String flightNumber = flightNoText.getText();
             String origin = originText.getText();
             String destination = destinationText.getText();
+            double price=Double.parseDouble(priceText.getText());
+            int capacity=Integer.parseInt(capacityText.getText());
             LocalDate departureDate = null;
             try {
                 departureDate = LocalDate.parse(depDateText.getText());
@@ -99,7 +108,7 @@ public class AddFlightWindow extends JFrame implements ActionListener {
                 throw new FlightBookingSystemException("Date must be in YYYY-DD-MM format");
             }
             // create and execute the AddFlight Command
-            Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate);
+            Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate,price,capacity);
             addFlight.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of flights
             mw.displayFlights();
