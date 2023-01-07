@@ -17,6 +17,8 @@ import bcu.cmp5332.bookingsystem.model.Flight;
 class CustomerTest {
 
 	Customer customer = new Customer(1, "Vish ODEDRA", "9876543210", "vish@microsoft.com");
+	Flight flight = new Flight(1, "FL007", "London", "Leeds", LocalDate.parse("2022-12-24"), 350.0, 100);
+	Booking booking = new Booking(1, customer, flight, LocalDate.parse("2023-01-05"));
 	
 	@Test
 	public void testGetId() throws Exception {
@@ -58,9 +60,10 @@ class CustomerTest {
 	
 	@Test
 	public void testGetBooking() throws Exception {
-        //dont know how to do
-		
-		assertEquals(, customer.getBookings());		
+		List<Booking> c1 = new ArrayList<>();
+		customer.addBooking(booking);
+		c1.add(booking);
+		assertEquals(c1, customer.getBookings());	
 	}
 	
 	@Test
@@ -84,15 +87,17 @@ class CustomerTest {
 	
 	@Test
 	public void testAddBooking() throws Exception {
-		//dont know, how to test
-		
-		assertEquals(, customer.addBooking(booking));
+		List<Booking> c1 = new ArrayList<>();
+		customer.addBooking(booking);
+		c1.add(booking);
+		assertEquals(c1, customer.getBookings());
 	}
 	
 	@Test
 	public void testCancelBookingForFlight() throws Exception {
-		//dont know, how to test
-		
-		assertEquals(, customer.cancelBookingForFlight(booking));
+		List<Booking> c1 = new ArrayList<>();
+		customer.addBooking(booking);
+		customer.cancelBookingForFlight(flight);
+		assertEquals(c1, customer.getBookings());
 	}
 }
