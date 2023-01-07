@@ -1,7 +1,7 @@
 package bcu.cmp5332.bookingsystem.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.time.LocalDate;
 
@@ -13,7 +13,7 @@ import bcu.cmp5332.bookingsystem.model.Flight;
 
 class BookingTest {
 
-	Flight flight = new Flight(1, "FL007", "London", "Leeds", LocalDate.parse("2022-12-24"));
+	Flight flight = new Flight(1, "FL007", "London", "Leeds", LocalDate.parse("2022-12-24"), 350.0, 100);
 	Customer customer = new Customer(1, "Vish ODEDRA", "9876543210", "vish@microsoft.com");
 	Booking booking = new Booking(1, customer, flight, LocalDate.parse("2023-01-05"));
 	
@@ -52,7 +52,7 @@ class BookingTest {
 
 	@Test
 	public void testSetFlight() throws Exception {
-		Flight flight = new Flight(2, "XYZ111", "Manchester", "Barcelona", LocalDate.parse("2023-01-04"));
+		Flight flight = new Flight(2, "XYZ111", "Manchester", "Barcelona", LocalDate.parse("2023-01-04"), 200.0, 80);
 		booking.setFlight(flight);
 		assertEquals(flight, booking.getFlight());
 	}
