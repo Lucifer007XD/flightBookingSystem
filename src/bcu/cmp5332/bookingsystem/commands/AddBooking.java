@@ -19,7 +19,7 @@ public class AddBooking implements Command{
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem)throws FlightBookingSystemException{
 		int maxId = 0;
-		for (Customer c : flightBookingSystem.getCustomer()) {
+		for (Customer c : flightBookingSystem.getCustomers()) {
 		    if (c.getBookings().size() > 0) {
 		    	maxId = maxId + c.getBookings().size();
 		    }
