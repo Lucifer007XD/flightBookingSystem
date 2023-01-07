@@ -159,10 +159,13 @@ public class MainWindow extends JFrame implements ActionListener {
             new RemoveFlightWindow(this);
             
         } else if (ae.getSource() == bookingsIssue) {
+            new AddBookingWindow(this);
             
-            
-        } else if (ae.getSource() == bookingsCancel) {
-            
+        }else if(ae.getSource()==bookingsUpdate) {
+        	new UpdateBookingWindow(this);
+        	
+        }else if (ae.getSource() == bookingsCancel) {
+        	new RemoveBookingWindow(this);
             
         } else if (ae.getSource() == custView) {
             displayCustomers();
@@ -184,10 +187,13 @@ public class MainWindow extends JFrame implements ActionListener {
         Object[][] data = new Object[flightsList.size()][6];
         for (int i = 0; i < flightsList.size(); i++) {
             Flight flight = flightsList.get(i);
-            data[i][0] = flight.getFlightNumber();
-            data[i][1] = flight.getOrigin();
-            data[i][2] = flight.getDestination();
-            data[i][3] = flight.getDepartureDate();
+            if(flight.getStatus()==false) {
+            	data[i][0] = flight.getFlightNumber();
+                data[i][1] = flight.getOrigin();
+                data[i][2] = flight.getDestination();
+                data[i][3] = flight.getDepartureDate();
+               }
+            
         }
 
         JTable table = new JTable(data, columns);
