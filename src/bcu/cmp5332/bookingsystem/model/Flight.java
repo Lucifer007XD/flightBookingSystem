@@ -27,7 +27,7 @@ public class Flight {
         this.origin = origin;
         this.destination = destination;
         this.departureDate = departureDate;
-       
+        this.price = price;
         this.capacity=capacity;
         
         passengers = new HashSet<>();
