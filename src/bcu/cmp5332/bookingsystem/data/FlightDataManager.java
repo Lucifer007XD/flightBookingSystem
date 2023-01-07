@@ -27,7 +27,7 @@ public class FlightDataManager implements DataManager {
                     String origin = properties[2];
                     String destination = properties[3];
                     LocalDate departureDate = LocalDate.parse(properties[4]);
-                    double price=Integer.parseInt(properties[5]);
+                    double price=Double.parseDouble(properties[5]);
                     int capacity=Integer.parseInt(properties[6]);
                     Flight flight = new Flight(id, flightNumber, origin, destination, departureDate,price,capacity);
                     fbs.addFlight(flight);
