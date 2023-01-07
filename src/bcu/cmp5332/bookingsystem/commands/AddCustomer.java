@@ -19,9 +19,9 @@ public class AddCustomer implements Command {
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         int maxId =0;
-        if(flightBookingSystem.getCustomer().size()>0) {
-        	int lastIndex=flightBookingSystem.getCustomer().size()-1;
-        	maxId=flightBookingSystem.getCustomer().get(lastIndex).getId();
+        if(flightBookingSystem.getCustomers().size()>0) {
+        	int lastIndex=flightBookingSystem.getCustomers().size()-1;
+        	maxId=flightBookingSystem.getCustomers().get(lastIndex).getId();
         }
         Customer customer=new Customer(++maxId,this.name,this.phone,this.email);
         flightBookingSystem.addCustomer(customer);
