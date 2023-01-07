@@ -42,7 +42,7 @@ public class CustomerDataManager implements DataManager {
     public void storeData(FlightBookingSystem fbs) throws IOException {
         // TODO: implementation here
         try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))){
-    		for (Customer c1 : fbs.getCustomer()) {
+    		for (Customer c1 : fbs.getCustomers()) {
     			out.print(c1.getId() + SEPARATOR);
     			out.print(c1.getName() + SEPARATOR);
     			out.print(c1.getPhone() + SEPARATOR);
