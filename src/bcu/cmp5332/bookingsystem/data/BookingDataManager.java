@@ -48,7 +48,7 @@ public class BookingDataManager implements DataManager {
     public void storeData(FlightBookingSystem fbs) throws IOException {
         // TODO: implementation here
         try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))){
-    		for (Customer c1: fbs.getCustomer()) {
+    		for (Customer c1: fbs.getCustomers()) {
     			for(Booking b1: c1.getBookings()){
                     Customer customer=b1.getCustomer();
                     Flight flight=b1.getFlight();
