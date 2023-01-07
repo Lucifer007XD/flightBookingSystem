@@ -9,10 +9,12 @@ import bcu.cmp5332.bookingsystem.model.*;
 public class EditBooking implements Command {
 	private int bookingId;
 	private int flightId;
+	private LocalDate today=LocalDate.now();
 	
 	public EditBooking(int bookingId,int flightId) {
 		this.bookingId=bookingId;
 		this.flightId=flightId;	
+		
 		
 	}
 	
@@ -27,6 +29,7 @@ public class EditBooking implements Command {
 			if(b.getId()==bookingId){
 				oldFlightId=b.getFlight().getId();
 				b.setFlight(newFlight);
+				b.setBookingDate(today);
 				break;
 			}
 
@@ -35,6 +38,7 @@ public class EditBooking implements Command {
 		oldFlight.removePassenger(customer);
 		
 		newFlight.addPassenger(customer);
+		
 		
 		System.out.println("Booking Updated Successsfully");
 	}
