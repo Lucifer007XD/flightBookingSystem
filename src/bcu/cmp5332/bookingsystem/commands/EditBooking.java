@@ -25,6 +25,8 @@ public class EditBooking implements Command {
 		Customer customer=flightBookingSystem.getCustomerByID(customerId);
 		Flight newFlight=flightBookingSystem.getFlightByID(flightId);
 		
+		if (newFlight.getDepartureDate().isAfter(today)||newFlight.getDepartureDate().isEqual(today)) {
+		
 		for(Booking b:customer.getBookings()){
 			if(b.getId()==bookingId){
 				oldFlightId=b.getFlight().getId();
@@ -41,6 +43,9 @@ public class EditBooking implements Command {
 		
 		
 		System.out.println("Booking Updated Successsfully");
+		}else {
+			throw new FlightBookingSystemException("Flight Already Departed");
+		}
 	}
 	
 }
