@@ -11,6 +11,7 @@ public class Booking {
 
     public Booking(int bookingId,Customer customer, Flight flight, LocalDate bookingDate) {
         // TODO: implementation here
+        this.bookingId=bookingId;
     	this.customer=customer;
     	this.flight=flight;
     	this.bookingDate=bookingDate;
