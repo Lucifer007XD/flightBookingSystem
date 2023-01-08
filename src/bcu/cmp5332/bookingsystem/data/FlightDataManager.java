@@ -32,7 +32,7 @@ public class FlightDataManager implements DataManager {
                     Flight flight = new Flight(id, flightNumber, origin, destination, departureDate,price,capacity);
                     fbs.addFlight(flight);
                 } catch (NumberFormatException ex) {
-                    throw new FlightBookingSystemException("Unable to parse book id " + properties[0] + " on line " + line_idx
+                    throw new FlightBookingSystemException("Unable to parse flight id " + properties[0] + " on line " + line_idx
                         + "\nError: " + ex);
                 }
                 line_idx++;
