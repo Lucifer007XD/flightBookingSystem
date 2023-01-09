@@ -78,9 +78,12 @@ public class RemoveFlightWindow extends JFrame implements ActionListener{
             Command removeFlight = new RemoveFlight(flightId);
             removeFlight.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of flights
-            mw.displayFlights();
+          
             // hide (close) the AddFlightWindow
             this.setVisible(false);
+            JOptionPane.showMessageDialog(null,"Flight Removed","Success",JOptionPane.INFORMATION_MESSAGE);
+            mw.displayFlights();
+
         } catch (FlightBookingSystemException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
