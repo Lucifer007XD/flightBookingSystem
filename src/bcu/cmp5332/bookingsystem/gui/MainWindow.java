@@ -192,16 +192,17 @@ public class MainWindow extends JFrame implements ActionListener {
     public void displayFlights() {
         List<Flight> flightsList = fbs.getFlights();
         // headers for the table
-        String[] columns = new String[]{"Flight No", "Origin", "Destination", "Departure Date"};
+        String[] columns = new String[]{"ID","Flight No", "Origin", "Destination", "Departure Date"};
         Object[][] data = new Object[flightsList.size()][6];
    
         for (int i = 0; i < flightsList.size(); i++) {
             Flight flight = flightsList.get(i);
             if(flight.getStatus()==false) {
-            	data[i][0] = flight.getFlightNumber();
-                data[i][1] = flight.getOrigin();
-                data[i][2] = flight.getDestination();
-                data[i][3] = flight.getDepartureDate();
+                data[i][0]=flight.getId();
+            	data[i][1] = flight.getFlightNumber();
+                data[i][2] = flight.getOrigin();
+                data[i][3] = flight.getDestination();
+                data[i][4] = flight.getDepartureDate();
           
                
                
@@ -235,16 +236,17 @@ public class MainWindow extends JFrame implements ActionListener {
     public void displayCustomers() {
         List<Customer> customersList = fbs.getCustomers();
         // headers for the table
-        String[] columns = new String[]{"Name", "Phone", "Email","Bookings"};
+        String[] columns = new String[]{"ID","Name", "Phone", "Email","Bookings"};
 
         Object[][] data = new Object[customersList.size()][6];
         for (int i = 0; i < customersList.size(); i++) {
             Customer customer = customersList.get(i);
            if(customer.getStatus()==false) {
-        	   data[i][0] = customer.getName();
-               data[i][1] = customer.getPhone();
-               data[i][2] = customer.getEmail();
-               data[i][3]=showBookingsBtn;
+               data[i][0]=customer.getId();
+        	   data[i][1] = customer.getName();
+               data[i][2] = customer.getPhone();
+               data[i][3] = customer.getEmail();
+               data[i][4]=showBookingsBtn;
                
                
                String id="";
@@ -302,7 +304,7 @@ public class MainWindow extends JFrame implements ActionListener {
     public void displayPassengers(int id) {
     	 List<Flight> flightsList = fbs.getFlights();
          // headers for the table
-         String[] columns = new String[]{"Name", "Phone", "Email"};
+         String[] columns = new String[]{"ID","Name", "Phone", "Email"};
 
          Object[][] data=null;
          for (int i = 0; i < flightsList.size(); i++) {
@@ -312,10 +314,10 @@ public class MainWindow extends JFrame implements ActionListener {
              	 data =new Object[passengersList.size()][6];
              		for (int j=0;j<passengersList.size();j++) {
              			Customer customer=passengersList.get(j);
-             			
+             			data[j][0]=customer.getId();
              			data[j][1]=customer.getName();
              			data[j][2]=customer.getPhone();
-             			data[j][0]=customer.getEmail();
+             			data[j][3]=customer.getEmail();
              		}
              		
              			
