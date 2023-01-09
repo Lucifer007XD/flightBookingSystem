@@ -91,10 +91,12 @@ public class AddBookingWindow extends JFrame implements ActionListener {
             // create and execute the AddFlight Command
             Command addBooking = new AddBooking(flightId,customerId,bookingDate);
             addBooking.execute(mw.getFlightBookingSystem());
-            // refresh the view with the list of flights
-            mw.displayCustomers();
+                       // refresh the view with the list of flights
+            
             // hide (close) the AddFlightWindow
             this.setVisible(false);
+            JOptionPane.showMessageDialog(null,"Booking Added","Success",JOptionPane.INFORMATION_MESSAGE);
+            mw.displayCustomers();
         } catch (FlightBookingSystemException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
