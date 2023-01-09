@@ -3,6 +3,8 @@ package bcu.cmp5332.bookingsystem.gui;
 import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.model.*;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -11,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 
 
 public class MainWindow extends JFrame implements ActionListener {
@@ -35,6 +38,8 @@ public class MainWindow extends JFrame implements ActionListener {
     private JMenuItem custView;
     private JMenuItem custAdd;
     private JMenuItem custDel;
+    private JButton showPassengersBtn = new JButton("Display Passengers");
+    private JButton showBookingsBtn = new JButton("Display Bookings");
 
     private FlightBookingSystem fbs;
 
@@ -176,6 +181,11 @@ public class MainWindow extends JFrame implements ActionListener {
         } else if (ae.getSource() == custDel) {
            new RemoveCustomerWindow(this); 
             
+        }else if (ae.getSource()==showPassengersBtn) {
+        	new ShowPassengersWindow(this);
+        	
+        }else if(ae.getSource()==showBookingsBtn) {
+        	new ShowBookingWindow(this);
         }
     }
 
@@ -183,8 +193,8 @@ public class MainWindow extends JFrame implements ActionListener {
         List<Flight> flightsList = fbs.getFlights();
         // headers for the table
         String[] columns = new String[]{"Flight No", "Origin", "Destination", "Departure Date"};
-
         Object[][] data = new Object[flightsList.size()][6];
+   
         for (int i = 0; i < flightsList.size(); i++) {
             Flight flight = flightsList.get(i);
             if(flight.getStatus()==false) {
@@ -192,19 +202,40 @@ public class MainWindow extends JFrame implements ActionListener {
                 data[i][1] = flight.getOrigin();
                 data[i][2] = flight.getDestination();
                 data[i][3] = flight.getDepartureDate();
+          
+               
+               
+                ;
+                
                }
             
         }
-
+       
         JTable table = new JTable(data, columns);
+        
+        
+            
+
+        
         this.getContentPane().removeAll();
         this.getContentPane().add(new JScrollPane(table));
-        this.revalidate();
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new GridLayout(1, 3));
+        bottomPanel.add(new JLabel("     "));
+        bottomPanel.add(this.showPassengersBtn);
+
+        showPassengersBtn.addActionListener(this);
+
+        this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+
+        setVisible(true);
+            this.revalidate();
     }	
     public void displayCustomers() {
         List<Customer> customersList = fbs.getCustomers();
         // headers for the table
-        String[] columns = new String[]{"Name", "Phone", "Email"};
+        String[] columns = new String[]{"Name", "Phone", "Email","Bookings"};
 
         Object[][] data = new Object[customersList.size()][6];
         for (int i = 0; i < customersList.size(); i++) {
@@ -213,6 +244,12 @@ public class MainWindow extends JFrame implements ActionListener {
         	   data[i][0] = customer.getName();
                data[i][1] = customer.getPhone();
                data[i][2] = customer.getEmail();
+               data[i][3]=showBookingsBtn;
+               
+               
+               String id="";
+               id=id+customer.getId();
+               showBookingsBtn.setActionCommand(id);
            }
          
         }
@@ -220,6 +257,81 @@ public class MainWindow extends JFrame implements ActionListener {
         JTable table = new JTable(data, columns);
         this.getContentPane().removeAll();
         this.getContentPane().add(new JScrollPane(table));
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new GridLayout(1, 3));
+        bottomPanel.add(new JLabel("     "));
+        bottomPanel.add(this.showBookingsBtn);
+
+        showBookingsBtn.addActionListener(this);
+
+        this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+
+
+        
+        
         this.revalidate();
-    }	
+    }
+    public void displayBookings(int id) {
+    	List<Customer> customersList=fbs.getCustomers();
+    	String[] columns=new String[] {"Booking Id","Flight Number","Booking Date"};
+    	Object[][] data=null ;
+    	 for (int i = 0; i < customersList.size(); i++) {
+             Customer customer = customersList.get(i);
+            if(customer.getId()==id) {
+         	   List<Booking> bookingList=customer.getBookings();
+         	 data =new Object[bookingList.size()][6];
+         		for (int j=0;j<bookingList.size();j++) {
+         			Booking booking=bookingList.get(j);
+         			data[j][0]=booking.getId();
+         			data[j][1]=booking.getFlight().getFlightNumber();
+         			data[j][2]=booking.getBookingDate();
+         			
+         		}
+         	   
+         	   }
+          
+         }
+    	 JTable table = new JTable(data, columns);
+         this.getContentPane().removeAll();
+         this.getContentPane().add(new JScrollPane(table));
+         this.revalidate();
+    	 
+    	
+    	
+    }
+    public void displayPassengers(int id) {
+    	 List<Flight> flightsList = fbs.getFlights();
+         // headers for the table
+         String[] columns = new String[]{"Name", "Phone", "Email"};
+
+         Object[][] data=null;
+         for (int i = 0; i < flightsList.size(); i++) {
+             Flight flight = flightsList.get(i);
+             if(flight.getId()==id) {
+            	 List<Customer> passengersList=flight.getPassengers();
+             	 data =new Object[passengersList.size()][6];
+             		for (int j=0;j<passengersList.size();j++) {
+             			Customer customer=passengersList.get(j);
+             			
+             			data[j][1]=customer.getName();
+             			data[j][2]=customer.getPhone();
+             			data[j][0]=customer.getEmail();
+             		}
+             		
+             			
+             }
+             
+         }
+
+         JTable table = new JTable(data, columns);
+
+         
+         this.getContentPane().removeAll();
+         this.getContentPane().add(new JScrollPane(table));
+         this.revalidate();
+    	
+    }
+    
+   
+    
 }
