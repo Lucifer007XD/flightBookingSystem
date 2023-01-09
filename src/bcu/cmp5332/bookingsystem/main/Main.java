@@ -27,11 +27,12 @@ public class Main {
             try {
                 Command command = CommandParser.parse(line);
                 command.execute(fbs);
+                FlightBookingSystemData.store(fbs);
             } catch (FlightBookingSystemException ex) {
                 System.out.println(ex.getMessage());
             } 
         }
-        FlightBookingSystemData.store(fbs); //in adding data it is okay, but while other commands are excuted the is again generated and it loses all data
+
         System.exit(0);
     	}catch(NumberFormatException ex) {
     		System.out.print(ex.getMessage());
