@@ -35,7 +35,7 @@ public class RemoveCustomerWindow extends JFrame implements ActionListener{
 
          }
 
-         setTitle("Delete a Existing Flight");
+         setTitle("Delete a Existing Customer");
 
          setSize(350, 220);
          JPanel topPanel = new JPanel();
@@ -75,10 +75,14 @@ public class RemoveCustomerWindow extends JFrame implements ActionListener{
             
             Command removeCustomer = new RemoveCustomer(customerId);
             removeCustomer.execute(mw.getFlightBookingSystem());
+           
             // refresh the view with the list of flights
-            mw.displayCustomers();
+           
             // hide (close) the AddFlightWindow
             this.setVisible(false);
+            JOptionPane.showMessageDialog(null,"Customer Removed","Success",JOptionPane.INFORMATION_MESSAGE);
+            mw.displayCustomers();
+            
         } catch (FlightBookingSystemException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
