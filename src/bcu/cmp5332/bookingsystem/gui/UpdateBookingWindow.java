@@ -93,9 +93,12 @@ public class UpdateBookingWindow extends JFrame implements ActionListener {
             Command updateBooking = new EditBooking(bookingId,flightId);
             updateBooking.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of flights
-            mw.displayCustomers();
+           
             // hide (close) the AddFlightWindow
             this.setVisible(false);
+            JOptionPane.showMessageDialog(null,"Booking Updated","Success",JOptionPane.INFORMATION_MESSAGE);
+            mw.displayCustomers();
+
         } catch (FlightBookingSystemException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
